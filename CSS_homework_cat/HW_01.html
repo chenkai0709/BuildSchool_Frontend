@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/05c128ff7b.js" crossorigin="anonymous"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .header{
+            position: sticky;
+            top: -56px;
+            z-index: 2;
+        }
+        .banner1{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #272626;
+            color: #fff;
+            font-size: 20px;
+            font-family: sans-serif;
+            font-weight: 100;
+            padding: 0 50px;
+            height: 59px;
+        }
+        .banner1 .tel i{
+            color:#ff9933;
+            transform: scale(0.7);
+        }
+        .banner1 .tel a{
+            color: #fff;
+            transition: 0.5s;
+        }
+        .banner1 .tel a:hover{
+            color: #ff9933;
+        }
+        .banner1 .social{
+            display: flex;
+        }
+        .banner1 .social div{
+            margin: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 50%;
+            transition: 0.5s;
+        }
+        .banner1 .social i{
+            transform: scale(0.5);
+            color: #000;
+        }
+        .banner1 .social div:hover{
+            background-color: #ff9933;
+        }
+
+        .banner2{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px 0px;
+            margin: 0 auto;
+            /* width: 1163px; */
+            width: 100%;
+        }
+        .banner2 .logo{
+            margin: 0 60px;
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .banner2 .logo a{
+            color: #535353;
+        }
+        .banner2 .logo img{
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .banner2 .menu a{
+            color: rgb(112, 111, 111);
+            font-size: 20px;
+            margin: 0 20px;
+            font-weight: lighter;
+            font-family: Calibri;
+        }
+        .banner2 .donate button{
+            margin: 0 60px;
+            padding: 18px 45px;
+            font-size: 12px;
+            color: #ff9933;
+            font-family: sans-serif;
+            border: 2px solid #ff9933;
+            background-color: #fff;
+        }
+        .banner2 .donate button:hover{
+            color: #fff;
+            background-color: #7abee9;
+            transition: 0.3s;
+            border-color: #7abee9;
+        }
+        .banner2 .donate button:active{
+            color: #ff9933;
+            background-color: #fff;
+            transition: 0.3s;
+        }
+
+        .main .main1{
+            background-image: url("./img/asset 9.jpeg");
+            background-position: center;
+            background-size: cover;
+            height: 540px;
+            padding-top: 100px;
+        }
+        .main .main1 .content{
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+        .main1 .p1{ font-size: 60px; color: rgb(90, 90, 90); font-family:Calibri;}
+        .main1 .p2{ font-size: 86px; color: rgb(122, 197, 247); font-family:Calibri; font-weight: bold;}
+        .main1 .p3{ font-size: 26px; color: rgb(90, 90, 90); font-family:Calibri;}
+        .main1 button{ background-color: #ff9933; color: #fff;
+                       padding: 23px 54px; border: none; font-size: 18px;
+                       margin-top: 30px;
+                       transition: 0.5s;
+                     }
+        .main1 button:hover{ background-color: #000; }
+        .main1 button:active{ background-color: #ff9933; }
+
+        .main .main2{
+            height: 600px;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            padding: 0 20px;
+        }
+        .main2 img{
+            width: 560px;
+            margin: 0 26px;
+        }
+
+        .main2 .p1{ font-size: 54px; color: rgb(90, 90, 90); font-family:Calibri; font-weight: bold;}
+        .main2 .p2{ font-size: 36px; color: rgb(122, 197, 247); font-family:Calibri; font-weight: lighter;
+                    margin: 20px 0;
+                }
+        .main2 .p3{ font-size: 16px; color: rgb(139, 138, 138); font-family:sans-serif;}
+        .main2 button{ background-color: #ff9933; color: #fff;
+                       padding: 22px 64px; border: none; font-size: 14px;
+                       margin-top: 34px;
+                       transition: 0.5s;
+                     }
+        .main2 button:hover {background-color: #000;}
+        .main2 button:active {background-color: #ff9933;}
+        .main3{
+                background-color: rgb(250, 249, 249);
+                padding: 50px 0;
+              }
+        .main3 .word{
+            text-align: center;
+            margin: 50px 0;
+        }
+        .main3 .word .p1{font-size: 50px; color: rgb(90, 90, 90); font-family:Arial; font-weight: bold;}
+        .main3 .word .p2{ font-size: 32px; color: rgb(122, 197, 247); font-family:Calibri;}
+        .main3 .pic { 
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        .main3 .pic .item{
+            position: relative;
+            padding: 10px;
+        }
+        .main3 .pic .item .mask{
+            width: 370px;
+            height: 500px;
+            position: absolute;
+            background-color: #000;
+            opacity: 0;
+            transition: .3s;
+            z-index: 1;
+        }
+        .main3 .pic .item .mask:hover{ opacity:.65; }
+        .main3 .pic p{
+            /* margin: 10px; */
+            position: absolute;
+            width: 370px;
+            bottom: 100px;
+            color: #fff;
+            font-size: 34px;
+            z-index: 1;
+        }
+        /* .main3 .pic img{ margin: 10px;} */
+
+        .main4{
+            display: flex;
+            justify-content: space-around;
+            padding: 100px 0;
+        }
+        .main4 .left,
+        .main4 .right{
+            padding: 50px 50px 0 50px;
+        }
+        .main4 .left p{ font-size: 50px; color: #535353; font-family: sans-serif; font-weight: bold; text-align: right;}
+        .main4 .right p{ font-size: 16px; color: #8d8d8d; font-family:Calibri; padding: 10px 0;}
+        .main4 .right button{  background-color: #ff9933; color: #fff;
+                               padding: 22px 59px; border: none; font-size: 14px;
+                               margin-top: 34px; border-radius: 2px;
+                               transition: 0.3s;
+                            }
+        .main4 .right button:hover { background-color: #000; }
+        .main4 .right button:active { background-color: #ff9933; }
+        
+        .main5{
+            background-image: url("./img/asset 13.jpeg");
+            padding: 50px;
+            height: 300px;
+            text-align: center;
+        }
+        .main5 .word .p1{ font-size: 54px; color: rgb(90, 90, 90); font-family:Calibri; font-weight: bold;}
+        .main5 .word .p2{ font-size: 60px; color: rgb(122, 197, 247); font-family:Calibri; font-weight: bold;}
+        .main5 .word .p3{ font-size: 26px; font-family:Calibri; font-weight: lighter;}
+        .main5 .btn_grp button{ background-color: rgb(250, 152, 41); color: #fff;
+                               padding: 24px 54px; border: none; font-size: 14px;
+                               margin: 10px; border-radius: 2px;
+                               transition: 0.3s;
+                            }
+        .main5 .btn_grp button:hover{ background-color: #7abee9; }
+        .main5 .btn_grp button:active{ background-color: #ff9933; }
+        
+        .main6 { background-image: url("./img/asset 15.jpeg");
+                 background-size: cover;
+                 height: 500px;
+                 background-attachment: fixed;
+               }
+
+
+        .main7{ border-top: 20px solid  #ff9933; }
+        .main7 .word{
+            margin: 100px;
+            text-align: center;
+        }
+        .main7 .word .p1{font-size: 50px; color: rgb(90, 90, 90); font-family:Arial; font-weight: bold;}
+        .main7 .word .p2{ font-size: 32px; color: rgb(122, 197, 247); font-family:Calibri;}
+        .main7 .video{ text-align: center;}
+        .main7 .video iframe{ width: 1170px; height: 658px;}
+        
+        .main8 .top{
+            width: 1170px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+            /* text-align: center; */        }
+        .main8 .top .img > img{
+            width: 570px;
+            margin: 15px;
+        }
+        .main8 .top .img{ 
+            position: relative;
+        }
+        .main8 .top .info{
+            text-align: center;
+            position: absolute;
+            margin: auto;
+            top: 100px;
+            left: 0;
+            right: 0;
+        }
+        .main8 .top .info img{
+            
+            border-radius: 50%;
+        }
+        .main8 .top .info p{
+            color: #fff;
+        }
+        .main8 .top .info .p1{
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .main8 .top .info .p2{
+            font-size: 30px;
+            line-height: 45px;
+        }
+        .main8 .bottom{
+            background-image: url("./img/asset 18.jpeg");
+            background-position: 80% 60%;
+            background-size: cover;
+            height: 500px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            text-align: center;
+        }
+        .main8 .bottom .p1{
+            color: #fff;
+            font-size: 60px;
+            font-weight: bold;
+        }
+        .main8 .bottom .p2{
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .main9 .top{
+            text-align: center;
+            height: 200px;
+        }
+        .main9 .top p{font-size: 50px; color: rgb(90, 90, 90); font-family:Arial; line-height: 200px;}
+
+        .main9 .ig{
+            display: flex;
+        }
+        .main9 .ig .item{
+            width: 25%;
+            margin: 0 auto;
+            position: relative;
+        }
+        .main9 .ig img{
+            width: 100%;
+            vertical-align: bottom;
+        } 
+        .main9 .ig .mask{
+            /* 使畫面佈滿整張圖 */
+            width: 100%;
+            height: 100%;
+            /* 使畫面覆蓋在圖上 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 使ig圖示置中對齊 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* mask 樣式設定 */
+            background-color: rgba(255, 153, 51, 0.7);
+            opacity: 0;
+            transition: .5s;
+        }
+        .main9 .ig i{
+            /* ig 樣式設定 */
+            font-size: 34px;
+            color: #fff;
+            /* ig 動畫設定 */
+            opacity: 1;
+            transform: scale(0.1);
+            transition: .5s;
+        }
+        .main9 .ig .mask:hover{
+            opacity: 1;
+        }
+        .main9 .ig .mask:hover i{
+            transform: scale(1.5);
+        }
+
+        .bottom{ background-color: rgb(44, 43, 43); padding: 10px 0 50px 0;}
+        .bottom .logo{
+            text-align: center;
+            height: 61px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .bottom .logo img{ 
+            margin-right: 20px;
+        }
+        .bottom .logo a{
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .bottom .link i{
+            width: 55px;
+            height: 55px;
+            color: #fff;
+            line-height: 55px;
+        }
+        .bottom .link a:nth-child(1) i{ background-color: #00aeef; }
+        .bottom .link a:nth-child(2) i{ background-color: #547cd5; }
+        .bottom .link a:nth-child(3) i{ background-color: #cc3300; }
+        .bottom .link a:nth-child(4) i{ background-color: #0075b6; }
+
+        .bottom .link i:hover{
+            opacity: 0.8;
+        }
+
+        .bottom .link{
+            text-align: center;
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+        .bottom .word{
+            color: #fff;
+            text-align: center;
+            line-height: 44px;
+        }
+        .bottom .word i{
+            color: #ff9933;
+            font-size: 12px;
+        }
+        .telephone{
+            position: fixed;
+            bottom: 18px;
+            left: 18px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #fff;
+            text-align: center;
+        }
+        .telephone i{
+            color: #ff9933;
+            font-size: 36px;
+            line-height: 80px;
+        }
+        .roll_up{
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 57px;
+            height: 57px;
+            border-radius: 2px;
+            background-color: #ff9933;
+            text-align: center;
+            transition: 0.5s;
+        }
+        .roll_up:hover{
+            background-color: #7abee9;
+        }
+        .roll_up i{
+            color: #fff;
+            font-size: 18px;
+            line-height: 57px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="banner1">
+            <div class="tel">
+                <i class="fas fa-phone-alt"></i>
+                <span>Toll-free: <a href="#">(123)456-7890</a></span>
+            </div>
+            <div class="social">
+                <div><a href="#"><i class="fab fa-twitter"></i></a></div>
+                <div><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+                <div><a href="#"><i class="fab fa-pinterest-p"></i></a></div>
+                <div><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+            </div>
+        </div>
+        <div class="banner2">
+            <div class="logo">
+                <a href="#">
+                    <img src="./img/asset 0.png" alt="logo">
+                    Anilove
+                </a>
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#">News</a>
+                <a href="#">Contacts</a>
+            </div>
+            <div class="donate">
+                <button>DONATE NOW!</button>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main1">
+            <div class="content">
+                <p class="p1">Animals Need</p>
+                <p class="p2">YOUR Help!</p>
+                <p class="p3">You can chip in with money & effort!</p>
+                <button>DONATE NOW!</button>
+            </div>
+        </div>
+        <div class="main2">
+            <div class="pic"><img src="./img/asset 1.jpeg" alt=""></div>
+            <div class="content">
+                <p class="p1">About Us</p>
+                <p class="p2">What Makes Us Care About Pets?</p>
+                <p class="p3">If it wasn’t for our founder’s childhood spent on a ranch in northern Texas, surrounded by domestic animals and pets all the time till she went to college – there might have been no Anilove animal shelter now. So as soon as she graduated with her Veterinary degree 12 years ago, she already knew what she will be doing for a living.<br/><br/>
+                All in all, with thousands of animals saved off the streets and cared for every year, we hope to encourage much more pet adoptions to happen!</p>
+                <button>LEARN MORE</button>
+            </div>
+        </div>
+        <div class="main3">
+            <div class="word">
+                <p class="p1">How You Can Help</p>
+                <p class="p2">There Are Countless Ways You Can Join In & Help Us!</p>
+            </div>
+            <div class="pic">
+                <div class="item">
+                    <div class="mask"></div>
+                    <img src="./img/asset 10.jpeg" alt="">
+                    <p>Volunteer</p>
+                </div>
+                <div class="item">
+                    <div class="mask"></div>
+                    <img src="./img/asset 11.jpeg" alt="">
+                    <p>Adopt</p>
+                </div>
+                <div class="item">
+                    <div class="mask"></div>
+                    <img src="./img/asset 12.jpeg" alt="">
+                    <p>Sponsor</p>
+                </div>
+            </div>
+        </div>
+        <div class="main4">
+            <div class="left">
+                <p>Volunteer to Save<br/>
+                    Animals Now!</p>
+                <img src="./img/asset 2.jpeg" alt="">
+            </div>
+            <div class="right">
+                <img src="./img/asset 3.jpeg" alt="">
+                <p>With so many pets less fortunate than your cat and dog, there’s always something you can do about it!</p>
+                <button>VOLUNTEER</button>
+            </div>
+        </div>
+        <div class="main5">
+            <div class="word">
+                <p class="p1">Upcoming Events</p>
+                <p class="p2">Kennel Training Class</p>
+                <p class="p3">FR, June 11th</p>
+            </div>
+            <div class="btn_grp">
+                <button>DELAILS</button>
+                <button>VIEW ALL</button>
+            </div>
+        </div>
+        <div class="main6">
+            <!-- <img src="./img/asset 15.jpeg" alt=""> -->
+        </div>
+        <div class="main7">
+            <div class="word">
+                <p class="p1">Latest News & Updates</p>
+                <p class="p2">See a Video Review of Our Cutest Pets!</p>
+            </div>
+            <div class="video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/cxCD6Ntjl94" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- <video controls src="https://youtu.be/bxnZArACzuU"></video> -->
+            </div>
+        </div>
+        <div class="main8">
+            <div class="top">
+                <div class="img">
+                    <img src="./img/asset 16.jpeg" alt="">
+                    <div class="info">
+                        <img src="http://template73996.motopreview.com/mt-demo/73900/73996/mt-content/uploads/2018/10/mt-1614-content-img11.jpg" alt="">
+                        <p class="p1">18 Sept, by  Jennifer Moreno</p>
+                        <p class="p2">New Advancements in the<br/>
+                            Veterinary Industry</p>
+                    </div>
+                </div>
+                <div class="img">
+                    <img src="./img/asset 17.jpeg" alt="">
+                    <div class="info">
+                        <img src="http://template73996.motopreview.com/mt-demo/73900/73996/mt-content/uploads/2018/10/mt-1614-content-img12.jpg" alt="">
+                        <p class="p1">18 Sept, by Jennifer Moreno</p>
+                        <p class="p2">Do Dogs Hate It When You Hug <br/>Them?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="div">
+                    <img src="./img/mt-1614-content-img13.jpg" alt="">
+                    <p class="p1">1000</p>
+                    <p class="p2">Pets</p>
+                </div>
+                <div class="div">
+                    <img src="./img/mt-1614-content-img14.jpg" alt="">
+                    <p class="p1">20</p>
+                    <p class="p2">Awards</p>
+                </div>
+                <div class="div">
+                    <img src="./img/mt-1614-content-img15.jpg" alt="">
+                    <p class="p1">100</p>
+                    <p class="p2">Staffers</p>
+                </div>
+                <div class="div">
+                    <img src="./img/mt-1614-content-img16.jpg" alt="">
+                    <p class="p1">1200</p>
+                    <p class="p2">Contibutors</p>
+                </div>
+            </div>
+        </div>
+        <div class="main9">
+            <div class="top"><p>See Our Adorable Pets @Instagram!</p></div>
+            <div class="ig">
+                    <!-- <a href=""> -->
+                        <div class="item"> 
+                            <img src="./img/asset 6.jpeg" alt="">
+                            <div class="mask"><i class="fab fa-instagram"></i></div>
+                        </div>
+                    </a>
+                    <!-- <a href=""> -->
+                        <div class="item">
+                            <img src="./img/asset 7.jpeg" alt="">
+                            <div class="mask"><i class="fab fa-instagram"></i></div>
+                        </div>
+                    </a>
+                    <!-- <a href=""> -->
+                        <div class="item">
+                            <img src="./img/asset 5.jpeg" alt="">
+                            <div class="mask"><i class="fab fa-instagram"></i></div>
+                        </div>
+                    <!-- </a> -->
+                    <!-- <a href=""> -->
+                        <div class="item">
+                            <img src="./img/asset 8.jpeg" alt="">
+                            <div class="mask"><i class="fab fa-instagram"></i></div>
+                        </div>
+                    <!-- </a> -->
+            </div>
+            <div style="clear:both"></div>
+        </div>
+
+    </div>
+    <div class="bottom">
+        <div class="logo">
+            <img src="./img/asset 0.png" alt="">
+            <a href="#">Anilove</a>
+        </div>
+        <div class="link">
+            <a href="">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-pinterest"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+        <div class="word">
+            <p>Paid for by the ConLiberal NATIONAL COMMITTEE</p>
+            <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+            <p><i class="fas fa-map-marker-alt"></i> ConLiberal NATIONAL COMMITTEE 430 South Capitol Street Southeast Washington, DC 20003</p>
+            <p>2020 © Anilove. All rights reserved.</p>
+        </div>
+    </div>
+    <div class="telephone"><i class="fas fa-phone-alt"></i></div>
+    <div class="roll_up"><i class="fas fa-arrow-up"></i></div>
+</body>
+</html>
