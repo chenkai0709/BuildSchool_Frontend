@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Iphone with JavaScript</title>
+  </head>
+  <body>
+
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ml-0 mr-0">
+        <div class="container justify-content-center">
+            <div class="row justify-content-around">
+                <a class="navbar-brand" href="#">iphone</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">iWatch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">iPad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">iPhone</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main page -->
+    <div class="container product my-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="item">
+
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="item">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        'use strict';
+        // Object create
+        var Product = {
+            iPhone: {
+                Info: {
+                    productName: 'iPhone 11',
+                    baseImageUrl: './img/iphone11-white.png'
+                },
+                Spec: {
+                    Style: [
+                    { color: '白色', colorUrl: './img/finish-white.jpg', imageUrl: './img/iphone11-white.png', title: '選擇外觀。' },
+                    { color: '黑色', colorUrl: './img/finish-black.jpg', imageUrl: './img/iphone11-black.png' },
+                    { color: '綠色', colorUrl: './img/finish-green.jpg', imageUrl: './img/iphone11-green.png' },
+                    { color: '黃色', colorUrl: './img/finish-yellow.jpg', imageUrl: './img/iphone11-yellow.png' },
+                    { color: '紫色', colorUrl: './img/finish-purple.jpg', imageUrl: './img/iphone11-purple.png' },
+                    { color: '紅色', colorUrl: './img/finish-red.jpg', imageUrl: './img/iphone11-red.png' }
+                    ],
+                    Storage: [
+                        { size: '64 GB**', price: '24900', title: '選擇儲存容量' },
+                        { size: '128 GB**', price: '26900', title: '選擇儲存容量' },
+                        { size: '256 GB**', price: '30400', title: '選擇儲存容量' }
+                    ]
+                }
+            },
+            iWatch: {
+                Info: {
+                    productName: 'Apple Watch Series 5',
+                    baseImageUrl: "./img/iwatch_silver.jpg"
+
+                },
+                Spec: {
+                    Style: [
+                    { color: '銀色', colorUrl: './img/watch-silver.jpg', imageUrl: './img/iwatch_silver.jpg', title: '選擇外觀。'},
+                    { color: '金色', colorUrl: './img/watch-gold.jpg', imageUrl: './img/iwatch_gold.jpg' },
+                    { color: '太空灰色', colorUrl: './img/watch-black.jpg', imageUrl: './img/iwatch_spacegray.jpg' },
+                    { color: '白色', colorUrl: './img/watch-white.jpg', imageUrl: './img/iwatch_white.jpg' },
+                    ],
+                    Length: [
+                        { size: '40 <font size="3"><b>公釐</b></font>', price: '13400', title: '錶殼尺寸' },
+                        { size: '44 <font size="3"><b>公釐</b></font>', price: '14400', title: '錶殼尺寸' }
+                    ],
+                    Connect: [
+                        { size: 'GPS', price: '0', title: '連線能力' },
+                        { size: 'GPS + <font size="3"><b>行動網路</b></font>', price: '3500', title: '連線能力' }
+                    ]
+                }
+            },
+            iPad: {
+                Info: {
+                    productName: 'iPad Pro',
+                    baseImageUrl: './img/ipad-pro-spacegray.png'
+                },
+                Spec: {
+                    Style: [
+                    { color: '太空灰', colorUrl: './img/finish-space-gray.png', imageUrl: './img/ipad-pro-spacegray.png', title: '選擇外觀。' },
+                    { color: '銀色', colorUrl: './img/finish-silver.png', imageUrl: './img/ipad-pro-silver.png' }
+                   ],
+                    Length: [
+                        { size: '11 <font size="3"><b>吋顯示器</b></font>', price: '25900', title: '機型' },
+                        { size: '12.9 <font size="3"><b>吋顯示器</b></font>', price: '32900', title: '機型' }
+                    ],
+                    Connect: [
+                        { size: 'Wifi', price: '0', title: '連線能力' },
+                        { size: 'Wifi + <font size="3"><b>行動網路</b></font>', price: '3500', title: '連線能力' }
+                    ],
+                    Storage: [
+                        { size: '128GB', price: '0', title: '選擇儲存容量' },
+                        { size: '256GB', price: '3500', title: '選擇儲存容量' },
+                        { size: '512GB', price: '10500', title: '選擇儲存容量' },
+                        { size: '1TB', price: '17500', title: '選擇儲存容量' }
+                    ]
+                }
+            }
+        }
+
+        // DOM 選取
+        let leftCol = document.querySelector('.product > .row > .col-6:nth-child(1)');
+        let rightCol = document.querySelector('.product > .row > .col-6:nth-child(2)');
+
+        // left
+        let left = document.createElement('div');
+        leftCol.appendChild(left);
+        left.style.position = "sticky";
+        left.style.top = "-50px";
+        
+        // left image
+        let productImg = document.createElement('img');
+        productImg.classList.add('mw-100');
+        left.appendChild(productImg);
+
+        // Spec block
+        function updateSpec(productType) {
+            // right
+            var right = document.createElement('div');
+            rightCol.appendChild(right);
+    
+            // title
+            let right_title = document.createElement('h1');
+            right_title.innerHTML = "<b>購買 iPhone 11</b>";
+            right.appendChild(right_title);
+
+            for (let prop in productType.Spec) {
+                // Spec Group
+                let specGroup = document.createElement('div');
+                specGroup.classList.add('d-flex', 'flex-wrap');
+                specGroup.classList.add('py-3');
+                specGroup.classList.add('border-bottom');
+                // Spec title
+                let specTitle = document.createElement('p');
+                specTitle.innerHTML = `<b>${productType.Spec[prop][0].title}</b>`
+                specTitle.classList.add('w-100');
+                specGroup.appendChild(specTitle);
+
+                for (let i = 0, len = productType.Spec[prop].length; i < len; i++) {
+                    // create block
+                    let spec = document.createElement('div');
+                    spec.classList.add(`${prop}`);
+                    if (prop == 'Style') {
+                        var colorImg = document.createElement('img');
+                    }else{
+                        var spech3 = document.createElement('h3');
+                    }
+                    let specWord = document.createElement('p');
+                    // spec style class
+                    spec.classList.add('text-center');
+                    spec.classList.add('col-5');
+                    spec.classList.add('mr-3')
+                    spec.classList.add('mb-3')
+                    spec.classList.add('pt-3')
+                    spec.style.border = '1px solid #dee2e6';
+                    // set block value
+                    if (prop == 'Style') {
+                        colorImg.src =  productType.Spec[prop][i].colorUrl;
+                        specWord.innerText = productType.Spec[prop][i].color;
+                    }else{
+                        spech3.innerHTML = productType.Spec[prop][i].size;
+                        specWord.innerText = "NT$" + productType.Spec[prop][i].price;
+                    }
+                    // append block child
+                    if (prop == 'Style') {
+                        spec.appendChild(colorImg);
+                    }else{
+                        spec.appendChild(spech3);
+                    }
+                    spec.appendChild(specWord);
+                    specGroup.appendChild(spec);
+        
+                    // spec block function
+                    spec.addEventListener('mouseover', function () {
+                        this.style.cursor = 'pointer';
+                        // this.style.borderColor = "lightgray";
+                    })
+                    spec.addEventListener('mouseout', function () {
+                        // spec.style.border = '1px solid #dee2e6';
+                    })
+
+                    if (prop == 'Style') {
+                        spec.addEventListener('click', function() {
+                            productImg.src = productType.Spec[prop][i].imageUrl;           
+                            spec.parentNode.childNodes.forEach(x => x.style.borderColor = '#dee2e6');
+                            this.style.borderColor = '#0070c9';
+                        })
+                    }else{
+                        spec.addEventListener('click', function() {
+                            spec.parentNode.childNodes.forEach(x => x.style.borderColor = '#dee2e6');
+                            this.style.borderColor = '#0070c9';
+                        })
+                        
+                        spec.addEventListener('click', function() {
+                            let totalMoney = spec.parentNode.parentNode.childNodes.forEach(x => x.childNodes)
+                            dollar = dollar + +productType.Spec[prop][i].price;
+                            
+                            price.innerHTML = `<b>NT$${dollar}</b>`;
+                            priceTax.innerHTML = `含加值型營業稅: 約 NT$${Math.floor(dollar * 0.047)}*`;
+                            pricePay.innerHTML = `最低月付 NT$${Math.floor(dollar / 12)}，12個月，0% 利率`;
+                        })
+                    }
+                }
+                right.appendChild(specGroup);
+                right.appendChild(priceGroup);
+            }
+
+
+            
+        }       
+        
+        // create price block
+        let priceGroup = document.createElement('div');
+        priceGroup.classList.add('p-3');
+        priceGroup.classList.add('mt-4', 'mr-5', 'mb-4');
+        priceGroup.classList.add('bg-light');
+
+        // price Content
+        let price = document.createElement('h2');
+        let priceTax = document.createElement('p');
+        let pricePay = document.createElement('a');
+
+        var dollar = 0;
+        
+        price.innerHTML = `<b>NT$${dollar}</b>`;
+        priceTax.innerHTML = `含加值型營業稅: 約 NT$${dollar * 0.047}*`;
+        pricePay.innerHTML = `最低月付 NT$${dollar / 12}，12個月，0% 利率`;
+        pricePay.classList.add('border-bottom', 'pb-3', 'mb-3', 'd-block')
+        // price button
+        let priceButton = document.createElement('button');
+        priceButton.innerText = "加入購物袋";
+        priceButton.classList.add('bg-primary', 'text-white', 'd-block', 'px-5', 'py-1', 'border-primary', 'border')
+        // append price element
+        priceGroup.appendChild(price);
+        priceGroup.appendChild(priceTax);
+        priceGroup.appendChild(pricePay);
+        priceGroup.appendChild(priceButton);
+       
+
+
+        function findTypeName(type) {
+            for(let prop in Product) {
+                if (prop == type){
+                    return prop;
+                }
+            }
+        } 
+        
+        function initialValue(link) {
+            while(rightCol.firstChild) {
+                    rightCol.firstChild.remove();
+                }
+            productImg.src = Product[findTypeName(link.innerText)].Info.baseImageUrl;
+            dollar = 0;
+            price.innerText = dollar;
+        }
+        // Nav-link 選取
+        let navLink = document.querySelectorAll('.nav-link');
+        for (let link of navLink) {
+            link.addEventListener('click', function() {
+                initialValue(link);
+                updateSpec(Product[findTypeName(link.innerText)]);
+            })
+        }
+
+
+    </script>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
