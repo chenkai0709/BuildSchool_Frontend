@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Guess Number Gaming</title>
+  </head>
+  <body>
+      
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 border p-5 m-5 d-flex flex-wrap">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+      // -------------- Create Element -------------- //
+        let box = document.querySelector('body > .container > .row > div');
+        // top start / reset / answer
+        let btnStart = document.createElement('div');
+        let btnReset = document.createElement('div');
+        let btnAns = document.createElement('div');
+        btnStart.classList.add('p-2', 'border', 'col-4', 'text-center');
+        btnReset.classList.add('p-2', 'border', 'col-4', 'text-center');
+        btnAns.classList.add('p-2', 'border', 'col-4', 'text-center');
+        btnStart.innerHTML = "<b>開始</b>"
+        btnReset.innerHTML = "<b>重新開始</b>"
+        btnAns.innerHTML = "<b>看答案</b>"
+        box.appendChild(btnStart);
+        box.appendChild(btnReset);
+        box.appendChild(btnAns);
+        // middle content
+        let content = document.createElement('div');
+        content.classList.add('border', 'col-12', 'my-4', 'p-0');
+        content.style.height = '300px';
+        content.style.overflow = 'scroll';
+        box.appendChild(content);
+        // bottom guess
+        let guessBlock = document.createElement('div');
+        let ansText = document.createElement('label');
+        let ansInput = document.createElement('input');
+        let ansBtn = document.createElement('div');
+
+        guessBlock.classList.add('col-12', 'border', 'p-0', 'd-flex', 'text-center')
+        ansText.classList.add('m-0', 'px-3', 'border')
+        ansText.style.backgroundColor = '#eee';
+        ansBtn.classList.add('border', 'px-3')
+        ansInput.classList.add('flex-grow-1', 'border')
+
+        ansText.innerText = '猜答案';
+        ansBtn.innerText = '猜!';
+
+        guessBlock.appendChild(ansText);
+        guessBlock.appendChild(ansInput);
+        guessBlock.appendChild(ansBtn);
+        box.appendChild(guessBlock);
+
+
+      // -------------- Set Element Event function -------------- //
+
+        // input dom 選取
+        let input = document.querySelector('input');
+        maskGray();
+        // reset event 
+        // btnReset.addEventListener('mouseover', pointer);
+        btnReset.addEventListener('click', function() {
+          input.disabled = true;                            // input close
+          btnAns.removeEventListener('click', showAnswer);  // show answer close
+          maskGray();
+          ansBtn.removeEventListener('click', checkAnswer);
+
+        })
+        // start event
+        btnStart.addEventListener('mouseover', pointer);
+        btnStart.addEventListener('click', function() {
+          createRandom();                                   // create random
+          input.disabled = false;                           // input open
+          btnAns.addEventListener('click', showAnswer);     // show answer open
+          maskwhite();
+          btnReset.addEventListener('mouseover', pointer);
+          ansBtn.addEventListener('mouseover', pointer);
+          btnAns.addEventListener('mouseover', pointer);
+          // ans button event
+          ansBtn.addEventListener('click', checkAnswer);
+        })
+
+        // -------- Function -------- //
+        // mask
+        function maskGray() {
+          btnStart.style.backgroundColor = '#fff'
+          btnAns.style.backgroundColor = '#eee'
+          ansBtn.style.backgroundColor = '#eee'
+          btnReset.style.backgroundColor = '#eee'
+        }
+        function maskwhite() {
+          btnStart.style.backgroundColor = '#eee'
+          btnAns.style.backgroundColor = '#fff'
+          ansBtn.style.backgroundColor = '#fff'
+          btnReset.style.backgroundColor = '#fff'
+        }
+        // mouseover pointer
+        function pointer() {
+          this.style.cursor = 'pointer';
+        }
+        // create random
+        var result = "";
+        function createRandom(){
+          result = "";
+          for (let i = 0; i < 4; i++) {
+            let value = Math.floor(Math.random() * 10);
+            while(result.includes(`${value}`)) {
+              value = Math.floor(Math.random() * 10);
+            }
+            result = result.concat(`${value}`);
+          }
+          console.log('result= '+result)
+        }
+
+        // alert answer
+        function showAnswer() {
+          alert('Answer : '+ result);
+        }
+
+        // check answer
+        function checkAnswer() {
+          let inValue = input.value;
+          if (isNaN(inValue)||(inValue.split("").length!=4)){
+            alert("請輸入四位0-9數字");
+          }else{
+            console.log(inValue.split(""));
+            console.log(result.split(""));
+            var A = inValue.split("").filter(x => x == result.split("")[inValue.indexOf(x)]).length;
+            var B = inValue.split("").filter(x => result.split("").indexOf(x) > -1).length;  
+            showResult(A, B);
+            input.value = "";
+          }
+        }
+
+        // show result
+        function showResult(A, B) {
+          let ansblock = document.createElement('div');
+          let ansAB = document.createElement('p');
+          let ansInput = document.createElement('p');
+
+          ansblock.classList.add('d-flex', 'border-bottom', 'm-0');
+          if(A==4){
+            ansAB.classList.add('bg-success', 'px-2', 'm-0');
+          }else{
+            ansAB.classList.add('bg-danger', 'px-2', 'm-0');
+          }
+          ansInput.classList.add('flex-grow-1', 'm-0', 'px-2')
+
+          ansAB.innerHTML = `${A}A${B}B`;
+          ansInput.innerHTML = input.value;
+
+          ansblock.appendChild(ansAB)
+          ansblock.appendChild(ansInput)
+          content.appendChild(ansblock);
+        }
+
+    </script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
