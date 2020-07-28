@@ -137,7 +137,7 @@
             console.log(inValue.split(""));
             console.log(result.split(""));
             var A = inValue.split("").filter(x => x == result.split("")[inValue.indexOf(x)]).length;
-            var B = inValue.split("").filter(x => result.split("").indexOf(x) > -1).length;  
+            var B = inValue.split("").filter(x => result.split("").indexOf(x) > -1).length - A;  
             showResult(A, B);
             input.value = "";
           }
