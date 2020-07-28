@@ -152,17 +152,17 @@
             calResult.innerText = 0;            
         }
         function reciprocal() {
-            calResult.innerText = 1 / +calResult.innerText;
+            calResult.innerText = (1 / +calResult.innerText).toFixed(10);
         }
         function nsquare() {
             calFormal.innerText = calResult.innerText + ' ** ';
             calResult.innerText = 0;              
         }
         function squareroot() {
-            calResult.innerText = (+calResult.innerText) ** (1/2);
+            calResult.innerText = ((+calResult.innerText) ** (1/2)).toFixed(10);
         }
         function eaual() {
-            calResult.innerText = eval(calFormal.innerText+calResult.innerText);
+            calResult.innerText = eval(calFormal.innerText+calResult.innerText).toFixed(10);
         }
 
     </script>
