@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>calculator</title>
+  </head>
+  <body>
+      
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-3">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 外框
+        let box = document.querySelector('body > .container > .row > div');
+        box.classList.add('border', 'p-1', 'bg-light')
+        // title
+        let calTitle = document.createElement('div');
+        calTitle.innerHTML = "<b>小算盤</b>";
+
+        // calculation formal
+        let calFormal = document.createElement('div');
+        var cal;
+        calFormal.innerHTML = "";
+        calFormal.style.fontSize = "12px"
+        calFormal.style.height = '1rem'
+        calFormal.classList.add('text-right', 'overflow-hidden', 'px-3', 'text-muted', 'border')
+
+        // input text
+        let calResult = document.createElement('div');
+        calResult.innerHTML = "0";
+        calResult.style.fontSize = "36px"
+        calResult.style.height = "108px"
+        calResult.style.backgroundColor = "#eee"
+        calResult.classList.add('text-right', 'text-break', 'overflow-hidden', 'px-3', 'font-weight-bold', 'my-2')
+
+        box.appendChild(calTitle)
+        box.appendChild(calFormal)
+        box.appendChild(calResult)
+
+
+        let BtnBlock = document.createElement('div');
+        BtnBlock.classList.add('d-flex', 'flex-wrap', 'p-0', 'm-0')
+
+        let NumBlock = document.createElement('div');
+        NumBlock.classList.add('d-flex', 'flex-wrap', 'flex-row-reverse', 'p-0', 'm-0', 'col-9')
+
+        let fourblock = document.createElement('div');
+        fourblock.classList.add('p-0', 'm-0', 'col-3');
+
+        // calculate function
+        createCalBtn('%', remainder, BtnBlock);
+        createCalBtn('CE', initial, BtnBlock);
+        createCalBtn('C', initial, BtnBlock);
+        createCalBtn('&lt;x', substring, BtnBlock);
+        createCalBtn('1/x', reciprocal, BtnBlock);
+        createCalBtn('x<sup>n</sup>', nsquare, BtnBlock);
+        createCalBtn('&radic;x', squareroot, BtnBlock);
+        createCalBtn('&divide;', divide, BtnBlock);
+        // 0 ~ 9
+        for (let i = 9; i > 0; i--) {
+            createNumBtn(i, numClick, NumBlock);
+        }
+        createNumBtn('.', dot, NumBlock);
+        createNumBtn('0', numClick, NumBlock);
+        createNumBtn('+/-', negative, NumBlock);
+
+        // +-*/
+        createFourBtn('X', multi, fourblock);
+        createFourBtn('-', sub, fourblock);
+        createFourBtn('+', add, fourblock);
+        createFourBtn('=', eaual, fourblock);
+        
+
+        BtnBlock.appendChild(NumBlock);
+        BtnBlock.appendChild(fourblock);
+        box.appendChild(BtnBlock)
+
+        // function
+        function createCalBtn(name, func, parentNode) {
+            let CalBtn = document.createElement('div');
+            CalBtn.classList.add('px-3', 'py-2', 'mx-0', 'col-3', 'border', 'text-center', 'bg-light');
+            // CalBtn.style.backgroundColor = "#eee"
+            CalBtn.innerHTML = `${name}`;
+            CalBtn.addEventListener('click', func);
+            parentNode.appendChild(CalBtn);
+            return CalBtn;
+        }
+
+        function createNumBtn(name, func, parentNode) {
+            let btn = createCalBtn(name, func, parentNode);
+            btn.classList.add('col-4', 'bg-white');
+        }
+
+        function createFourBtn(name, func, parentNode) {
+            let btn = createCalBtn(name, func, parentNode);
+            btn.classList.add('col-12');
+        }
+
+        function numClick() {
+            calResult.innerText = +(calResult.innerText + this.innerText);
+            cal = +calResult.innerText;
+        }
+
+        function initial() {
+            calResult.innerText = 0;
+            calFormal.innerText = 0;
+        }
+        function negative() {
+            calResult.innerText = -calResult.innerText;
+        }
+        function dot() {
+            calResult.innerText = calResult.innerText + '.';
+        }
+        function substring() {
+            if (calResult.innerText.length >= 1){
+                calResult.innerText = calResult.innerText.substring(0, calResult.innerText.length-1)
+            }
+            if (calResult.innerText.length == 0) {
+                calResult.innerText = 0;
+            }
+
+        }
+        function add() {
+            calFormal.innerText = calResult.innerText + ' + ';
+            calResult.innerText = 0;
+        }
+        function sub() {
+            calFormal.innerText = calResult.innerText + ' - ';
+            calResult.innerText = 0;
+        }
+        function multi() {
+            calFormal.innerText = calResult.innerText + ' * ';
+            calResult.innerText = 0;           
+        }
+        function divide() {
+            calFormal.innerText = calResult.innerText + ' / ';
+            calResult.innerText = 0;  
+        }
+        function remainder() {
+            calFormal.innerText = calResult.innerText + ' % ';
+            calResult.innerText = 0;            
+        }
+        function reciprocal() {
+            calResult.innerText = 1 / +calResult.innerText;
+        }
+        function nsquare() {
+            calFormal.innerText = calResult.innerText + ' ** ';
+            calResult.innerText = 0;              
+        }
+        function squareroot() {
+            calResult.innerText = (+calResult.innerText) ** (1/2);
+        }
+        function eaual() {
+            calResult.innerText = eval(calFormal.innerText+calResult.innerText);
+        }
+
+    </script>
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
