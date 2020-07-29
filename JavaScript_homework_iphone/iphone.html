@@ -169,6 +169,8 @@
                 specTitle.classList.add('w-100');
                 specGroup.appendChild(specTitle);
 
+                // calculate price
+                var priceArray = [];
                 for (let i = 0, len = productType.Spec[prop].length; i < len; i++) {
                     // create block
                     let spec = document.createElement('div');
@@ -194,6 +196,7 @@
                         spech3.innerHTML = productType.Spec[prop][i].size;
                         specWord.innerText = "NT$" + productType.Spec[prop][i].price;
                     }
+                    console.log(Object.values(productType.Spec)[1][0].price);
                     // append block child
                     if (prop == 'Style') {
                         spec.appendChild(colorImg);
@@ -206,28 +209,23 @@
                     // spec block function
                     spec.addEventListener('mouseover', function () {
                         this.style.cursor = 'pointer';
-                        // this.style.borderColor = "lightgray";
                     })
-                    spec.addEventListener('mouseout', function () {
-                        // spec.style.border = '1px solid #dee2e6';
+                    spec.addEventListener('click', function () {
+                        spec.parentNode.childNodes.forEach(x => x.style.borderColor = '#dee2e6');
+                        this.style.borderColor = '#0070c9';
                     })
 
                     if (prop == 'Style') {
                         spec.addEventListener('click', function() {
                             productImg.src = productType.Spec[prop][i].imageUrl;           
-                            spec.parentNode.childNodes.forEach(x => x.style.borderColor = '#dee2e6');
-                            this.style.borderColor = '#0070c9';
                         })
                     }else{
                         spec.addEventListener('click', function() {
-                            spec.parentNode.childNodes.forEach(x => x.style.borderColor = '#dee2e6');
-                            this.style.borderColor = '#0070c9';
-                        })
-                        
-                        spec.addEventListener('click', function() {
-                            let totalMoney = spec.parentNode.parentNode.childNodes.forEach(x => x.childNodes)
-                            dollar = dollar + +productType.Spec[prop][i].price;
-                            
+                            // calculate price
+                            let index = Object.keys(productType.Spec).indexOf(`${prop}`);
+                            priceArray[index-1] = +productType.Spec[prop][i].price;
+                            dollar = priceArray.reduce((acc, cur) => {return acc + cur;}, 0);
+                            // set price
                             price.innerHTML = `<b>NT$${dollar}</b>`;
                             priceTax.innerHTML = `含加值型營業稅: 約 NT$${Math.floor(dollar * 0.047)}*`;
                             pricePay.innerHTML = `最低月付 NT$${Math.floor(dollar / 12)}，12個月，0% 利率`;
@@ -238,8 +236,6 @@
                 right.appendChild(priceGroup);
             }
 
-
-            
         }       
         
         // create price block
