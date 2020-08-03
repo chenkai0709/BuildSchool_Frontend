@@ -1,0 +1,250 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+    <title>Mask Map</title>
+    <script class= "" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEKKVgc3nTfUBv-pMb8Q5CjNTO188EbT0&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+  </head>
+  <body>
+
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img class="w-75" src="https://static.wixstatic.com/media/5a71f2_1e714a102af34089a58b0544cc0ca35d~mv2.png/v1/fill/w_65,h_71,al_c,q_85,usm_0.66_1.00_0.01/5a71f2_1e714a102af34089a58b0544cc0ca35d~mv2.webp" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" data-toggle="collapse" data-target="#collapseMask">
+              <a class="nav-link" href="#">口罩地圖</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown mx-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="./img/satituation.png" alt="">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <P class="dropdown-item blueColor">疫情概況</P>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="https://1988.taiwan.gov.tw/%e9%98%b2%e7%96%ab/%e7%96%ab%e6%83%85%e6%a6%82%e6%b3%81/%e5%9c%8b%e5%85%a7%e7%96%ab%e6%83%85%e6%aa%a2%e8%a6%96/">國內疫情檢視</a>
+                  <a class="dropdown-item" href="https://1988.taiwan.gov.tw/%e9%98%b2%e7%96%ab/%e7%96%ab%e6%83%85%e6%a6%82%e6%b3%81/%e5%9c%8b%e5%a4%96%e7%96%ab%e6%83%85%e6%aa%a2%e8%a6%96/">國外疫情檢視</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown mx-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="./img/hospital.png" alt="">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <P class="dropdown-item blueColor">就醫須知</P>
+                    <div class="dropdown-divider"></div>
+                    <a href="https://www.cdc.gov.tw/File/Get/BEA0oQpYDsnWonHk8UFmWg" class="dropdown-item">隔離/檢疫/自主管理</a>
+                    <a href="https://www.cdc.gov.tw/File/Get/8PlAUhmzG6iZ_CEhmj44Jg" class="dropdown-item">社區監測通報採檢</a>
+                    <a href="https://www.cdc.gov.tw/" class="dropdown-item">通報個案處理流程</a>
+                    <a href="https://www.cdc.gov.tw/Category/List/acXvUkmTMsiQpB7OfyUGsw" class="dropdown-item">各縣市關懷服務中心</a>
+                    <a href="https://antiflu.cdc.gov.tw/ExaminationCounter" class="dropdown-item">全國指定社區採檢院所</a>
+                  </div>
+            </li>
+            <li class="nav-item dropdown mr-5 ml-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="./img/notice.png" alt="">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <P class="dropdown-item blueColor">防疫指引</P>
+                    <div class="dropdown-divider"></div>
+                    <a href="https://1988.taiwan.gov.tw/%E9%98%B2%E7%96%AB/%E9%98%B2%E7%96%AB%E6%8C%87%E5%BC%95/%E5%9C%8B%E9%9A%9B%E6%97%85%E9%81%8A%E8%88%87%E6%AA%A2%E7%96%AB%E6%8C%87%E5%BC%95/" class="dropdown-item">國際旅遊及檢疫指引</a>
+                    <a href="https://1988.taiwan.gov.tw/%E9%98%B2%E7%96%AB/%E9%98%B2%E7%96%AB%E6%8C%87%E5%BC%95/%E7%A4%BE%E5%8D%80%E7%AE%A1%E7%90%86%E7%B6%AD%E8%AD%B7%E5%9B%A0%E6%87%89%E6%8C%87%E5%BC%95/" class="dropdown-item">社區管理維護因應指引</a>
+                    <a href="https://1988.taiwan.gov.tw/%E9%98%B2%E7%96%AB/%E9%98%B2%E7%96%AB%E6%8C%87%E5%BC%95/%E5%85%AC%E7%9C%BE%E8%81%9A%E6%9C%83%E5%9B%A0%E6%87%89%E6%8C%87%E5%BC%95/" class="dropdown-item">公眾集會因應指引</a>
+                    <a href="https://1988.taiwan.gov.tw/%E9%98%B2%E7%96%AB/%E9%98%B2%E7%96%AB%E6%8C%87%E5%BC%95/%E5%A4%A7%E7%9C%BE%E9%81%8B%E8%BC%B8%E5%9B%A0%E6%87%89%E6%8C%87%E5%BC%95/" class="dropdown-item">大眾運輸因應指引</a>
+                    <a href="https://1988.taiwan.gov.tw/%E9%98%B2%E7%96%AB/%E9%98%B2%E7%96%AB%E6%8C%87%E5%BC%95/%E5%A4%A7%E5%9E%8B%E7%87%9F%E6%A5%AD%E5%A0%B4%E6%89%80%E5%9B%A0%E6%87%89%E6%8C%87%E5%BC%95/" class="dropdown-item">大型營業場所因應指引</a>
+                    <a href="https://1988.taiwan.gov.tw/%E9%98%B2%E7%96%AB/%E9%98%B2%E7%96%AB%E6%8C%87%E5%BC%95/%E7%A4%BE%E4%BA%A4%E8%B7%9D%E9%9B%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85/" class="dropdown-item">社交距離注意事項</a>
+                  </div>
+            </li>
+
+          </ul>
+        </div>
+    </nav>
+
+    <div class="mapBlock">
+        <div class="collapse" id="collapseMask">
+
+            <form action="">
+                <select name="county" id="county"></select> <span>縣市</span>
+                <select name="town" id="town"></select> <span>鄉鎮</span>
+                <select name="cunli" id="cunli"></select> <span>村里</span>
+            </form>
+
+            <ul class="list-group showName">
+            </ul>
+        </div>
+        
+        <div id="map"></div>   
+    </div>
+    
+    
+
+    
+    <!-- <script src="./app.js"></script> -->
+    <script>
+        let map;
+        function initMap() {
+            var myLatLng = { lat: 25.041593, lng: 121.536304 };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: myLatLng
+            });
+
+            setGeoJson();
+        }
+
+        // Fetch mask json data
+        let url = "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json";
+        let btn = document.querySelector('#btn');
+        window.onload = function () {
+            fetchResource();
+        }
+        
+        function fetchResource() {
+            fetch(url)
+                .then(response => response.text())
+                .then(text => {
+                    // 成功...
+                    maskObject = JSON.parse(text);
+                    setForm(maskObject);
+                })
+                .catch(ex => {
+                    // 失敗...
+                    console.log(ex)
+                });
+        }
+
+        function setForm(maskObject) {
+            let object = maskObject.features;
+
+            let countySelect = document.querySelector('#county')
+            filterRegion(object, 'county')
+            countySelect.addEventListener('change', function() {
+                let countyObject = object.filter(x => x.properties.county == this.value);
+                filterRegion(countyObject, 'town');
+                showName(countyObject, );
+            })
+
+            let townSelect = document.querySelector('#town')
+            townSelect.addEventListener('change', function() {
+                let townObject = object.filter(x => x.properties.town == this.value);
+                filterRegion(townObject, 'cunli');
+                showName(townObject)
+            })
+
+            let cunliSelect = document.querySelector('#cunli')
+            cunliSelect.addEventListener('change', function() {
+                let cunliObject = object.filter(x => x.properties.cunli == this.value);
+                showName(cunliObject)
+            })
+        }
+
+        function filterRegion(object, region) {
+            let result = [];
+            let select = document.querySelector(`#${region}`);
+            select.innerHTML = "";
+            for(let i = 0, len = object.length; i < len; i++) {
+                if(result.indexOf(object[i].properties[region]) == -1){
+                    result += object[i].properties[region];
+                    let option = document.createElement('option');
+                    option.innerHTML = object[i].properties[region]
+                    select.appendChild(option)
+                }
+            }
+        }
+
+        function showName(object) {
+            let showName = document.querySelector('.showName');
+            showName.innerHTML = "";
+            object.forEach(function(item){
+                let newli = document.createElement('li');
+                newli.classList.add("list-group-item");
+                newli.innerHTML = item.properties.name;
+                showName.appendChild(newli);
+                newli.addEventListener('click', function(){ 
+                    let location = new google.maps.LatLng(item.geometry.coordinates[1], item.geometry.coordinates[0]);
+                    map.setCenter(location);
+                    map.setZoom(20)
+                })
+            })
+        }
+
+
+        window.setGeoJson = function() {
+            // const result = map.data.loadGeoJson(url);
+            map.data.loadGeoJson(url, null, function (features) {
+                var markers = features.map(function (feature) {
+                    let count = feature.getProperty("mask_adult") + feature.getProperty("mask_child");
+                    var marker =  new google.maps.Marker({
+                        position: feature.getGeometry().get(0),
+                        icon: count > 100 ? "./img/green-dot.png" : count > 50 ? "./img/yellow-dot.png" : "./img/red-dot.png"
+                    });
+                    
+                    let infowindow = new google.maps.InfoWindow({
+                        content: setWindowInfo(feature.getProperty("name"), feature.getProperty("id"), feature.getProperty("mask_adult"), feature.getProperty("mask_child"), feature.getProperty("phone"), feature.getProperty("address")),
+                        // position: my,
+                        setOptions: {pixelOffset: new google.maps.Size(0,-34)}
+                    });
+                    marker.addListener('mouseover', function() {
+                        infowindow.open(map, marker);
+                    }); 
+                    marker.addListener('mouseout', function() {
+                        infowindow.close(map, marker);
+                    });
+                    return marker
+                });
+
+                var markerCluster = new MarkerClusterer(map, markers, {
+                    imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' 
+                });
+
+            });
+            map.data.setMap(null);
+        }
+
+        function setWindowInfo(name, id, maskLeft, childLeft, phone, address) {
+            let contentString = '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                `<h1 id="firstHeading" class="firstHeading">${name}</h1>` +
+                '<div id="bodyContent">' +
+                `<p>單位名稱 : ${name}</p>` +
+                `<p>單位編號 : ${id}</p>` +
+                `<p>成人口罩剩餘數量 : ${maskLeft}</p>` +
+                `<p>兒童口罩剩餘數量 : ${childLeft}</p>` +
+                `<p>連絡電話 : ${phone}</p>` +
+                `<p>地址 : ${address}</p>` +
+                '</div>' +
+                '</div>';
+            return contentString;
+        }
+
+    </script>
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
+
