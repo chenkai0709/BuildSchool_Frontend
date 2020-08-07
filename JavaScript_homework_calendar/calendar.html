@@ -114,28 +114,37 @@
     </div>
 
     <script>
-        var object = {
-            Note: []
-        };
+        // create null object to store data
+        // object architecture : 
+        // object {
+        //      Note: [
+        //          { year: xx , month: xx , day: xx ,  title: xx , text: xx },
+        //          { year: xx , month: xx , day: xx ,  title: xx , text: xx }
+        //            ...
+        //      ]     
+        // }
+        var object = { Note: [] };
 
         var tbody = document.querySelector("tbody");
         var year = document.querySelector("#year");
         var month = document.querySelector("#month");
+        // week day array to match Date.getMonth() .
         var monthList = ['January', 'Febrary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octobor', 'November', 'December'];
-
-        year.addEventListener('click', function(){
-            console.log('start')
-            for (let item in object.Note){
-                console.log(object.Note[item]);
-            }
-        })
+        
+        // create new Date.
         var DateNow = new Date()
         var tempYear = DateNow.getFullYear();
         var tempMonth = DateNow.getMonth();
         var tempDay = DateNow.getDate();
+        // to decide previent month and next month
+        var prevYear = (tempMonth == 0) ? tempYear - 1 : tempYear;
+        var nextYear = (tempMonth == 11) ? tempYear + 1 : tempYear;
+        var prevMonth = (tempMonth == 0) ? 11 : tempMonth - 1;
+        var nextMonth = (tempMonth == 11) ? tempMonth + 1 : 0;
         // for initial
         createDate(DateNow, DateNow.getFullYear(), DateNow.getMonth());
-
+        
+        // prev click event
         function prev(DateNow){
             if(tempMonth == 0){
                 tempYear--;
@@ -145,6 +154,7 @@
             }
             createDate(DateNow, tempYear, tempMonth)
         }
+        // next click event
         function next(DateNow){
             if(tempMonth == 11){
                 tempYear++;
@@ -155,13 +165,14 @@
             createDate(DateNow, tempYear, tempMonth)
         }
 
+        // create all td of one month, also contain few of previent month and next month
         function createDate(DateNow, Year, Month){
             tbody.innerHTML = "";
-            // let getDate = DateNow.getDay();
-            let firstDay = new Date(Year, Month, 1).getDay();
-            let dayNum = new Date(Year, Month + 1, 0).getDate();
-            let prevDayNum = new Date(Year, Month, 0).getDate();
-            let weekNum = Math.ceil((dayNum - (7 - firstDay)) / 7) + 1;
+            // to calculate placement, we need below information
+            let firstDay = new Date(Year, Month, 1).getDay();           // first day of current month
+            let dayNum = new Date(Year, Month + 1, 0).getDate();        // numbers day of current month 
+            let prevDayNum = new Date(Year, Month, 0).getDate();        // last date of previent month
+            let weekNum = Math.ceil((dayNum - (7 - firstDay)) / 7) + 1; // how many weeks we need in current month
             year.innerText = tempYear;
             month.innerText = monthList[Month];
 
@@ -183,11 +194,13 @@
 
                     if (day <= firstDay){
                         p_day.innerText = prevDayNum - firstDay + 1;
-                        td.setAttribute('id', `${tempMonth-1}${p_day.innerText}`);
-                        prevDayNum++;                      
+                        td.setAttribute('id', `${prevMonth}${p_day.innerText}`);
+                        td.style.backgroundColor = "#eee";
+                        prevDayNum++;                   
                     }else if (day > dayNum + firstDay){
                         p_day.innerText = nextDay;
-                        td.setAttribute('id', `${tempMonth+1}${p_day.innerText}`);
+                        td.setAttribute('id', `${nextMonth}${p_day.innerText}`);
+                        td.style.backgroundColor = "#eee";
                         nextDay++;
                     }else{
                         p_day.innerText = day - firstDay;
@@ -202,7 +215,10 @@
                 }
                 tbody.appendChild(tr);
             }
-            LoadData();
+            object.Note = [];
+            LoadData(prevYear, prevMonth);  
+            LoadData(nextYear, nextMonth);
+            LoadData(tempYear, tempMonth);
             showNoteOnTd(object.Note);
         }
 
@@ -251,13 +267,15 @@
         function showNoteOnTd(Array){
             Array.forEach(function(item){
                 let elemTd = document.getElementById(`${item.month}${item.day}`);
-                let div = elemTd.childNodes[1];
-                let p = document.createElement("p");
-                p.classList.add("m-1", "bg-danger", "text-white", "rounded-pill", "text-truncate", "text-left", "px-3");
-                p.style.overflow = "hidden"
-                p.style.width = "120px"
-                p.innerText = item.title;
-                div.appendChild(p);
+                if (elemTd != null){
+                    let div = elemTd.childNodes[1];
+                    let p = document.createElement("p");
+                    p.classList.add("m-1", "bg-danger", "text-white", "rounded-pill", "text-truncate", "text-left", "px-3");
+                    p.style.overflow = "hidden"
+                    p.style.width = "120px"
+                    p.innerText = item.title;
+                    div.appendChild(p);
+                }
             })
         }
 
@@ -285,10 +303,8 @@
                 icon_del.style.fontSize = "25px"
                 icon_del.style.height = "30px"
                 icon_del.addEventListener('click', function(){
-                    console.log(object.Note)
                     let index = object.Note.findIndex(x => (x.day == tempDay)&&(x.title == aTitle.innerText));
                     object.Note.splice(index, 1);
-                    console.log(object.Note)
                     document.getElementById(`B${x.title}`).remove();
                     this.previousSibling.remove();
                     this.remove();
@@ -322,15 +338,13 @@
             localStorage.setItem(key, JSON.stringify(object));
         }
         // load local storage to object
-        function LoadData(){
-            let key = "" + tempYear + tempMonth;
+        function LoadData(year, month){
+            let key = "" + year + month;
             let temp = JSON.parse(localStorage.getItem(key));
-            object.Note = [];
             if (temp != null){
-                object.Note = temp;
+                object.Note = object.Note.concat(temp);
             }
         }
-
 
     </script>
 
