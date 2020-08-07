@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0b0f700e33.js" crossorigin="anonymous"></script>
+    <title>Chen Kai Calendar</title>
+    <style>
+        .calendar, table{
+            width: 100%;
+            text-align: center;
+        }
+        .header, .border-0{
+            background-color: aquamarine;
+        }
+        table td:hover{
+            background-color: #eee;
+            cursor: pointer;
+        }
+        .modal-body{
+            height: 400px;
+        }
+        ::-webkit-scrollbar {display:none}
+
+        #addBtn:hover{
+            cursor: pointer;
+        }
+    </style>
+
+  </head>
+  <body>
+    <!-- HTML -->
+    <div class="container">
+        <div class="row">
+            <div class="calendar">
+                <div class="header d-flex">
+                    <button id="prev" class="border-0" onclick="prev()"><<</button>
+                    <h1 id="year">年分</h1>
+                    <h1 id="month" class="flex-grow-1">月份</h1>
+                    <button id="next" class="border-0" onclick="next()">>></button>
+                </div>
+                <table class="table table-bordered box">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wen</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- first Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title flex-grow-1 text-center" id="exampleModalLabel">代辦事項</h5>
+                    <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex flex-wrap">
+                    <ol class="w-100 pl-5 d-flex flex-wrap align-content-start">
+                    </ol>
+                    <div id="addBtn" class="text-center bg-info text-white p-3 mt-auto mb-0 w-100">Add new note</div>
+                    <!-- <input type="text"> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- second Modal -->
+    <div class="modal fade noteModal" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">新增事項</h5>
+                    <button type="button" class="close closeNoteModal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="title" class="d-block w-100">Title</label>
+                    <input type="text" class="d-block w-100">
+                    <label for="content" class="d-block w-100">Content</label>
+                    <textarea name="content" id="content" cols="20" rows="10" class="d-block w-100"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancel" type="button" class="btn btn-secondary closeNoteModal" data-dismiss="modal">Close</button>
+                    <button id="update" type="button" class="btn btn-primary" data-dismiss="modal" >Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var object = {
+            Note: []
+        };
+
+        var tbody = document.querySelector("tbody");
+        var year = document.querySelector("#year");
+        var month = document.querySelector("#month");
+        var monthList = ['January', 'Febrary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octobor', 'November', 'December'];
+
+        year.addEventListener('click', function(){
+            console.log('start')
+            for (let item in object.Note){
+                console.log(object.Note[item]);
+            }
+        })
+        var DateNow = new Date()
+        var tempYear = DateNow.getFullYear();
+        var tempMonth = DateNow.getMonth();
+        var tempDay = DateNow.getDate();
+        // for initial
+        createDate(DateNow, DateNow.getFullYear(), DateNow.getMonth());
+
+        function prev(DateNow){
+            if(tempMonth == 0){
+                tempYear--;
+                tempMonth = 11;
+            }else{
+                tempMonth--;
+            }
+            createDate(DateNow, tempYear, tempMonth)
+        }
+        function next(DateNow){
+            if(tempMonth == 11){
+                tempYear++;
+                tempMonth = 0;
+            }else{
+                tempMonth++;
+            }
+            createDate(DateNow, tempYear, tempMonth)
+        }
+
+        function createDate(DateNow, Year, Month){
+            tbody.innerHTML = "";
+            // let getDate = DateNow.getDay();
+            let firstDay = new Date(Year, Month, 1).getDay();
+            let dayNum = new Date(Year, Month + 1, 0).getDate();
+            let prevDayNum = new Date(Year, Month, 0).getDate();
+            let weekNum = Math.ceil((dayNum - (7 - firstDay)) / 7) + 1;
+            year.innerText = tempYear;
+            month.innerText = monthList[Month];
+
+            let day = 1;
+            let nextDay = 1;
+            for (let i = 1; i <= weekNum; i++){
+                let tr = document.createElement("tr");
+                for (let col = 0; col < 7; col++){
+                    // td
+                    let td = document.createElement("td")
+                    td.style.width = "14.285%"
+                    // td > p
+                    let p_day = document.createElement("p");
+                    p_day.classList.add('m-0', 'p-0', 'text-left');
+                    let div_td = document.createElement("div");
+                    div_td.style.fontSize = "12px"
+                    div_td.style.height = "36px"
+                    div_td.style.overflowY = "auto";
+
+                    if (day <= firstDay){
+                        p_day.innerText = prevDayNum - firstDay + 1;
+                        td.setAttribute('id', `${tempMonth-1}${p_day.innerText}`);
+                        prevDayNum++;                      
+                    }else if (day > dayNum + firstDay){
+                        p_day.innerText = nextDay;
+                        td.setAttribute('id', `${tempMonth+1}${p_day.innerText}`);
+                        nextDay++;
+                    }else{
+                        p_day.innerText = day - firstDay;
+                        td.setAttribute('id', `${tempMonth}${p_day.innerText}`);
+                        td.addEventListener('click', showNote)
+                    }
+
+                    td.appendChild(p_day);
+                    td.appendChild(div_td);
+                    tr.appendChild(td);
+                    day++;
+                }
+                tbody.appendChild(tr);
+            }
+            LoadData();
+            showNoteOnTd(object.Note);
+        }
+
+        saveEvent();
+
+        // modal selector (global variable)
+        var title = document.querySelector(".noteModal input");
+        var text = document.querySelector(".noteModal textarea");
+        var ol = document.querySelector("ol");
+
+        // Add each td click event to show first modal that can check note details.
+        function showNote(){
+            tempDay = this.childNodes[0].innerText;
+            this.setAttribute("data-toggle", "modal")
+            this.setAttribute("data-target", "#exampleModal")
+            let btn = document.querySelector("#addBtn");
+            title.value = "";
+            text.value = "";
+            btn.setAttribute("data-toggle", "modal")
+            btn.setAttribute("data-target", "#exampleModal2")
+            showNoteToFirstModal()
+        }   
+
+        // add click event to save new note to storage and update note details.
+        function saveEvent() {
+            let add = document.querySelector("#update");
+            add.addEventListener('click', function(){
+                if (title.value != ""){
+                    // add note to object
+                    let temp = {
+                        year: tempYear,
+                        month: tempMonth,
+                        day: tempDay,
+                        title: title.value,
+                        text: text.value
+                    }
+                    object.Note.push(temp)
+                    SaveData(object.Note);
+                    showNoteOnTd([temp]);
+                    showNoteToFirstModal();
+                }
+            });
+        }
+
+        // foreach all day in one month and add note title on td from object.
+        function showNoteOnTd(Array){
+            Array.forEach(function(item){
+                let elemTd = document.getElementById(`${item.month}${item.day}`);
+                let div = elemTd.childNodes[1];
+                let p = document.createElement("p");
+                p.classList.add("m-1", "bg-danger", "text-white", "rounded-pill", "text-truncate", "text-left", "px-3");
+                p.style.overflow = "hidden"
+                p.style.width = "120px"
+                p.innerText = item.title;
+                div.appendChild(p);
+            })
+        }
+
+
+        // add one note to note details.
+        function showNoteToFirstModal(){
+            ol.innerHTML = "";
+            let nodeList = object.Note.filter(x => (x.year == tempYear) && (x.month == tempMonth) && (x.day == tempDay));
+            nodeList.forEach(x => {
+                let li = document.createElement("li");
+                let div = document.createElement("div");
+                let aTitle = document.createElement("a")
+                let icon_edit = document.createElement("i");
+                let icon_del = document.createElement("i");
+                icon_edit.classList.add("far", "fa-edit", "pt-2");
+                icon_edit.style.fontSize = "25px"
+                icon_edit.style.height = "30px"
+                icon_edit.setAttribute("data-toggle", "modal")
+                icon_edit.setAttribute("data-target", "#exampleModal2")
+                icon_edit.addEventListener('click', function(){
+                    title.value = aTitle.innerText;
+                    text.value = div.innerText;
+                })
+                icon_del.classList.add("far", "fa-trash-alt", "pt-2", "text-danger", "ml-3");
+                icon_del.style.fontSize = "25px"
+                icon_del.style.height = "30px"
+                icon_del.addEventListener('click', function(){
+                    console.log(object.Note)
+                    let index = object.Note.findIndex(x => (x.day == tempDay)&&(x.title == aTitle.innerText));
+                    object.Note.splice(index, 1);
+                    console.log(object.Note)
+                    document.getElementById(`B${x.title}`).remove();
+                    this.previousSibling.remove();
+                    this.remove();
+                    SaveData(object.Note);
+                })
+                // set note style that show on first modal
+                li.classList.add("m-1", "px-2", "py-1")
+                li.style.width = "80%";
+                li.style.borderWidth = "10px";
+                li.setAttribute("id", `B${x.title}`);
+                aTitle.style.color = "red";
+                aTitle.classList.add("text-break", "400px", "d-block", "px-2", "py-1", "rounded", "bg-info", "text-white")
+                aTitle.setAttribute("data-toggle", "collapse")
+                aTitle.setAttribute("href", `#A${x.title}`)
+                div.classList.add("collapse", "alert", "alert-secondary");
+                div.setAttribute("id", `A${x.title}`);
+
+                aTitle.innerHTML = x.title;
+                div.innerHTML = x.text;
+                li.append(aTitle);
+                li.append(div);
+                ol.append(li);
+                ol.append(icon_edit);
+                ol.append(icon_del);
+            })
+        }
+
+        // update new object to local storage
+        function SaveData(object){
+            let key = "" + tempYear + tempMonth;
+            localStorage.setItem(key, JSON.stringify(object));
+        }
+        // load local storage to object
+        function LoadData(){
+            let key = "" + tempYear + tempMonth;
+            let temp = JSON.parse(localStorage.getItem(key));
+            object.Note = [];
+            if (temp != null){
+                object.Note = temp;
+            }
+        }
+
+
+    </script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
