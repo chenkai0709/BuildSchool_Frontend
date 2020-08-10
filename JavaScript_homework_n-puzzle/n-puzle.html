@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <style>
+            .col-2,
+            .col-6 {
+                height: 500px;
+            }
+            #picBox > div:hover,
+            #start:hover,
+            #tips:hover,
+            #answer:hover{
+                cursor: pointer;
+            }
+            .list-group-item:hover{
+                background-color: #007bff;
+            }
+        </style>
+        <title>N-PUZZLE</title>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-2 border p-4">
+                    <div class="border bg-secondary text-white text-center py-2 rounded" id="start">START</div>
+                    <div class="btn btn-secondary w-100 mt-4" id="level" type="button" data-toggle="collapse"
+                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        難易度
+                    </div>
+                    <div class="collapse" id="collapseExample">
+                        <div class="list-group text-center" id="list-tab" role="tablist">
+                            <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#collapseExample" id="easy">簡單</a>
+                            <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#collapseExample" id="medium">中等</a>
+                            <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#collapseExample" id="hard">困難</a>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <input class="w-100" id="nInput" type="text" placeholder="請輸入N，最小: 2">
+                    </div>
+                    <div class="border bg-secondary text-white text-center py-2 mt-4 rounded" id="tips">看提示</div>
+                    <div class="border bg-secondary text-white text-center py-2 mt-4 rounded" id="answer">解答</div>
+                    <div class="border bg-secondary text-white text-center py-2 mt-4 rounded" id="test">測試</div>
+                </div>
+                <div class="col-6 border bg-light p-0" id="picBox">
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var Stack = [
+                // { id: P1, direction: [1, 0], xNum: 5, yNum: 3 }
+                // ...
+            ];
+            var dirArray = [ [0, 1], [1, 0], [0, -1], [-1, 0] ];
+
+            var lastX = 0;
+            var lastY = 0;
+
+            var level = 50;
+
+
+            let nInput = document.getElementById("nInput");
+            nInput.addEventListener("change", setPuzzleArchi);
+            var N = 2;
+
+            let picBox = document.getElementById("picBox");
+            picBox.classList.add("d-flex", "flex-wrap")
+
+            let width = picBox.clientWidth;
+            let height = picBox.clientHeight;
+            let puzzleWidth = 0;
+            let puzzleHeight = 0
+
+            setPuzzleArchi();
+
+            let tips = document.getElementById("tips");
+            tips.addEventListener("mousedown", function () {
+                let masks = document.querySelectorAll("div.mask");
+                masks.forEach(x => x.style.opacity = "0.7");
+            })
+            tips.addEventListener("mouseup", function () {
+                let masks = document.querySelectorAll("div.mask");
+                masks.forEach(x => x.style.opacity = "0");
+            })
+
+            let start = document.getElementById("start");
+            start.addEventListener('click', () => {setRandom(level)});
+
+            let test = document.getElementById("test");
+            test.addEventListener('click', function(){
+                reback();
+            })
+
+            let answer = document.getElementById("answer");
+            answer.addEventListener('click', reback);
+
+            let listTab = document.getElementById("level");
+            let easyLevel = document.getElementById("easy");
+            let mediumLevel = document.getElementById("medium");
+            let hardLevel = document.getElementById("hard");
+            easyLevel.addEventListener('click', () => { listTab.innerText = easyLevel.innerText; level = 100 });
+            mediumLevel.addEventListener('click', () => { listTab.innerText = mediumLevel.innerText; level = 500 });
+            hardLevel.addEventListener('click', () => { listTab.innerText = hardLevel.innerText; level = 1000 });
+
+            function setPuzzleArchi() {
+                picBox.innerHTML = "";
+                Stack = [];
+                lastX = 0;
+                lastY = 0;
+                N = (nInput.value > 2) ? nInput.value : 2;
+                puzzleWidth = width / N;
+                puzzleHeight = height / N;
+
+                for (let i = 0; i < Math.pow(N, 2); i++) {
+                    let puzzle = document.createElement("div");
+                    puzzle.classList.add("position-relative");
+                    puzzle.style.backgroundImage = "url('./image/yell.jpg')";
+                    // puzzle.style.backgroundRepeat = "no-repeat"
+                    // puzzle.style.backgroundPosition = `${(i%N)*(130/(N-1))}% ${(Math.floor(i/N)*(70.5/(N-1)))}%`;
+                    puzzle.style.backgroundPosition = `${-(i%N)*(570/(N))}px ${-(Math.floor(i/N)*(500/(N)))}px`;
+                    puzzle.setAttribute("id", `P${i + 1}`);
+                    puzzle.style.width = `${puzzleWidth}px`;
+                    puzzle.style.height = `${puzzleHeight}px`;
+                    puzzle.style.transition = "top .5s, left .5s";
+                    if (i == Math.pow(N, 2) - 1) {
+                        puzzle.classList.add("bg-info");
+                        puzzle.setAttribute("id", "lastPuzzle");
+                    }
+                    lastpuzzle = document.getElementById("lastPuzzle");
+
+                    //  create puzzle mask
+                    let mask = document.createElement("div");
+                    mask.innerHTML = `${i + 1}`;
+                    mask.classList.add("w-100", "h-100", "text-center", "text-white", "mask");
+                    mask.style.lineHeight = `${puzzleHeight}px`;
+                    mask.style.fontSize = `${puzzleWidth / 2}px`
+                    mask.style.backgroundColor = "rgb(255,105,180)"
+                    mask.style.opacity = "0";
+
+                    puzzle.append(mask);
+                    picBox.append(puzzle);
+                    //   add puzzle move function
+                    puzzle.addEventListener("click", () => { puzzleEXchange(puzzle) } );
+                }
+            }
+            var lastpuzzle;
+
+            function setRandom(times){
+                let allpuzzle = document.querySelectorAll("#picBox > div");
+                lastpuzzle = document.getElementById("lastPuzzle");
+                for(let i = 0; i < times; i++){
+
+                    window.setTimeout(transitionEnd, 500);
+                    function transitionEnd(){
+                        let aroundLastArray = Array.from(allpuzzle).filter(function(element, index, array){
+                            for(let item of dirArray){
+                                if(checkMoveable(element, item[0], item[1])){
+                                    // console.log('true')
+                                    return true;    
+                                }
+                            }
+                        })
+                        let index = getRandom(0, aroundLastArray.length - 1)
+                        let randomPuzzle = aroundLastArray[index];
+                        randomPuzzle.style.transition = "top 0s, left 0s";
+                        lastpuzzle.style.transition = "top 0s, left 0s";
+                        puzzleEXchange(randomPuzzle);
+                    }
+                }
+            }
+
+            function getRandom(min, max){
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            function reback(){
+                while(Stack.length){
+                    let lastStep = Stack.pop();
+                    let direc = lastStep.direction;
+                    let xNum = lastStep.xNum;
+                    let yNum = lastStep.yNum;
+                    let element = document.getElementById(`${lastStep.id}`);
+
+                    move(element, xNum - direc[0], yNum - direc[1]);
+                    move(lastpuzzle, lastX + direc[0], lastY + direc[1]);
+                    lastX = lastX + direc[0];
+                    lastY = lastY + direc[1];
+                }
+            }
+            function puzzleEXchange(element){
+                lastpuzzle = document.getElementById("lastPuzzle");
+                let index = Stack.map(el => el.id).lastIndexOf(element.id);
+                let currX = (index == -1) ? 0 : Stack[index].xNum;
+                let currY = (index == -1) ? 0 : Stack[index].yNum;
+
+                for(let item of dirArray){
+                    if(checkMoveable(element, item[0], item[1])){
+                        move(element, currX + item[0], currY + item[1]);
+                        move(lastpuzzle, lastX - item[0], lastY - item[1])
+                        Stack.push( { id: element.id, direction: item, xNum: currX+item[0], yNum: currY+item[1]} )
+                        lastX = lastX - item[0];
+                        lastY = lastY - item[1];
+                        console.log("ok!")
+                        return
+                    }
+                }
+            }
+            function checkMoveable(puzzle, x, y){
+                let current = getPosition(puzzle);
+                let last = getPosition(lastpuzzle)
+                let boolean = ((current[0] + x * puzzleWidth) <= last[0] + 5) &&
+                            ((current[0] + x * puzzleWidth) >= last[0] - 5) &&
+                            ((current[1] + y * puzzleHeight) <= last[1] + 5) &&
+                            ((current[1] + y * puzzleHeight) >= last[1] - 5);
+                return boolean;
+            }
+            function move(puzzle, x, y){
+                puzzle.style.left = `${x * puzzleWidth}px`;
+                puzzle.style.top = `${y * puzzleHeight}px`;
+            }
+            function getPosition(element){
+                let x = element.offsetLeft;
+                let y = element.offsetTop;
+                return [x, y]
+            }
+
+
+        </script>
+
+
+
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
