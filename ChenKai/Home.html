@@ -31,6 +31,26 @@
         .card-text{
             height: 48px;
         }
+
+        .navbar{
+            border-bottom: 5px solid chocolate;
+        }
+        .navbar:hover{
+            background-color: lightgray !important;
+        }
+        .navbar:hover .navbar-brand, .navbar:hover .split span{
+            color: chocolate !important;
+        }
+        .navbar li{
+            font-weight: bold;
+        }
+        .navbar a:hover{
+            color: chocolate !important;
+        }
+
+        #cssHW, #jsHW{
+            display: none;
+        }
     </style>
 </head>
 
@@ -41,21 +61,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="#">CSS Homework <span class="sr-only">(current)</span></a>
+                    <a id="cssBtn" class="nav-link text-white" href="#">CSS Homework <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item"><span class="nav-link"> / </span></li>
+                <li class="nav-item split"><span class="nav-link"> / </span></li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Js Homewrok</a>
+                    <a id="jsBtn" class="nav-link text-white" href="#">Js Homewrok</a>
                 </li>
-                <li class="nav-item"><span class="nav-link"> / </span></li>
+                <li class="nav-item split"><span class="nav-link"> / </span></li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">TicketHub Project</a>
+                    <a class="nav-link text-white" href="http://tickethub.azurewebsites.net/" target="_blank">TicketHub Project</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="container my-5" id="cssHw">
+    <div class="container my-5" id="cssHW">
         <div class="row">
 
             <div class="col-4">
@@ -121,44 +141,11 @@
 
             <div class="col-4">
                 <div class="card border-secondary m-4 rounded">
-                    <img src="./Image/Apple.PNG" class="rounded-top border-bottom">
+                    <img src="./Image/N-puzzle.PNG" class="rounded-top border-bottom">
                     <div class="card-body text-secondary d-flex flex-wrap flex-column">
-                        <h5 class="card-title">JS生成Apple 網站</h5>
-                        <p class="card-text">全程使用JS生成HTML，練習 DOM元素操作</p>
-                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_iphone/iphone.html#" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card border-secondary m-4 rounded">
-                    <img src="./Image/Guess.PNG" class="rounded-top border-bottom">
-                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
-                        <h5 class="card-title">猜數字遊戲</h5>
-                        <p class="card-text">大家所熟知的1A2B遊戲，亂數產生不重複4個數字，判斷輸入答案。</p>
-                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_guessAB/guessAB.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card border-secondary m-4 rounded">
-                    <img src="./Image/Calculator.PNG" class="rounded-top border-bottom">
-                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
-                        <h5 class="card-title">計算機</h5>
-                        <p class="card-text">以Windows小算盤為藍圖，使用JS做出簡易型計算機。</p>
-                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_calculator/calculator.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card border-secondary m-4 rounded">
-                    <img src="./Image/Pizza.PNG" class="rounded-top border-bottom">
-                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
-                        <h5 class="card-title">Template Pizza Card</h5>
-                        <p class="card-text">利用XMLHttpRequest抓取GitHub上json資料，再用template產生多組。</p>
-                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_pizza/Template_PizzaCard.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                        <h5 class="card-title">拼圖遊戲</h5>
+                        <p class="card-text">拼圖小遊戲，可選擇拼圖片數及遊戲困難度。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_n-puzzle/n-puzle.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
                     </div>
                 </div>
             </div>
@@ -185,9 +172,49 @@
                 </div>
             </div>
 
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Apple.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">JS生成Apple 網站</h5>
+                        <p class="card-text">全程使用JS生成HTML，練習 DOM元素操作</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_iphone/iphone.html#" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Guess.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">猜數字遊戲</h5>
+                        <p class="card-text">大家所熟知的1A2B遊戲，亂數產生不重複4個數字，判斷輸入答案。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_guessAB/guessAB.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Calculator.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">計算機</h5>
+                        <p class="card-text">以Windows小算盤為藍圖，使用JS做出簡易型計算機。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_calculator/calculator.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Pizza.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">Template Pizza Card</h5>
+                        <p class="card-text">利用XMLHttpRequest抓取GitHub上json資料，再用template產生多組。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_pizza/Template_PizzaCard.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -200,6 +227,35 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
 </body>
+
+<script>
+    var css = document.getElementById("cssHW");
+    var js = document.getElementById("jsHW");
+    var cssBtn = document.getElementById("cssBtn");
+    var jsBtn = document.getElementById("jsBtn");
+
+    window.onload = function () {  
+        showCSS();
+        cssBtn.addEventListener("click", showCSS);
+        jsBtn.addEventListener("click", showJS);
+    }
+
+    function showCSS(){
+        css.style.display = "block";
+        cssBtn.setAttribute("style", "color: chocolate !important;");
+        js.style.display = "none";
+        jsBtn.setAttribute("style", "color: white !important;");
+    }
+
+    function showJS(){
+        js.style.display = "block";
+        jsBtn.setAttribute("style", "color: chocolate !important;");
+        css.style.display = "none";
+        cssBtn.setAttribute("style", "color: white !important;");
+    }
+
+</script>
 
 </html>
