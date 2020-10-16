@@ -15,10 +15,21 @@
     <style>
         .card{
             width: 302px;
+            height: 384px;
+            margin: auto;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .card:hover{
+            border: 3px solid gray !important;
         }
         .card img{
             width: 300px;
             height: 200px;
+        }
+
+        .card-text{
+            height: 48px;
         }
     </style>
 </head>
@@ -43,17 +54,104 @@
             </ul>
         </div>
     </nav>
-    <div class="container my-5">
-        <div class="row justify-content-around">
-            <div class="card border-secondary m-3 rounded">
-                <img src="./Image/Anilove.PNG" class="rounded-top">
-                <div class="card-body text-secondary d-flex flex-wrap flex-column">
-                    <h5 class="card-title">Anilove 網站切版</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary align-self-center">Go somewhere</a>
+
+    <div class="container my-5" id="cssHw">
+        <div class="row">
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Anilove.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">Anilove 網站切版</h5>
+                        <p class="card-text">不使用 Bootstrap 復刻電商網站，練習純手工切版。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/CSS_homework_cat/HW_01.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
                 </div>
             </div>
+            
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Naturio.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">Naturio 網站切版</h5>
+                        <p class="card-text">CSS 切版練習，復刻 Naturio網站。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/CSS_homework_natural/HW_02.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Toyota.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">Toyota 網站切版</h5>
+                        <p class="card-text">CSS 定位練習，在限定至多兩個絕對定位的條件下，練習切版。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/CSS_homework_toyota/HW_03.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/BuildSchool.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">Build School RWD切版</h5>
+                        <p class="card-text">使用輪播套件，並練習RWD網站切版。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/CSS_homework_buildschool/HW_04.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Taken.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">TAKEN 網站RWD 切版</h5>
+                        <p class="card-text">熟悉Bootstrap 套件，並練習RWD 切版。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/CSS_homework_taken/HW_05.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container my-5" id="jsHW">
+        <div class="row">
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Apple.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">JS生成Apple 網站</h5>
+                        <p class="card-text">全程使用JS生成HTML，練習 DOM元素操作</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_iphone/iphone.html#" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Guess.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">猜數字遊戲</h5>
+                        <p class="card-text">大家所熟知的1A2B遊戲，亂數產生不重複4個數字，判斷輸入答案。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_guessAB/guessAB.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-secondary m-4 rounded">
+                    <img src="./Image/Guess.PNG" class="rounded-top border-bottom">
+                    <div class="card-body text-secondary d-flex flex-wrap flex-column">
+                        <h5 class="card-title">猜數字遊戲</h5>
+                        <p class="card-text">大家所熟知的1A2B遊戲，亂數產生不重複4個數字，判斷輸入答案。</p>
+                        <a href="https://buildschool-frontend.azurewebsites.net/JavaScript_homework_guessAB/guessAB.html" target="_blank" class="btn btn-primary align-self-center px-5">Take a look</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 

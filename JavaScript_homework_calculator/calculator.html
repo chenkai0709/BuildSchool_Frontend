@@ -162,7 +162,8 @@
             calResult.innerText = ((+calResult.innerText) ** (1/2)).toFixed(10);
         }
         function eaual() {
-            calResult.innerText = eval(calFormal.innerText+calResult.innerText).toFixed(10);
+            let value = eval(calFormal.innerText+calResult.innerText).toFixed(10);
+            calResult.innerText = Number(value);
         }
 
     </script>
