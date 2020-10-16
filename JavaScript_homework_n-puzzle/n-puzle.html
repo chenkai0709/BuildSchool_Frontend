@@ -131,9 +131,11 @@
                     puzzle.style.width = `${puzzleWidth}px`;
                     puzzle.style.height = `${puzzleHeight}px`;
                     puzzle.style.transition = "top .5s, left .5s";
+                    puzzle.style.border = "1px solid #fff";
                     if (i == Math.pow(N, 2) - 1) {
-                        puzzle.classList.add("bg-info");
+                        puzzle.style.backgroundColor = "#D3D3D3";
                         puzzle.setAttribute("id", "lastPuzzle");
+                        puzzle.style.backgroundImage = "none";
                     }
                     lastpuzzle = document.getElementById("lastPuzzle");
 
@@ -142,8 +144,9 @@
                     mask.innerHTML = `${i + 1}`;
                     mask.classList.add("w-100", "h-100", "text-center", "text-white", "mask");
                     mask.style.lineHeight = `${puzzleHeight}px`;
-                    mask.style.fontSize = `${puzzleWidth / 2}px`
-                    mask.style.backgroundColor = "rgb(255,105,180)"
+                    mask.style.fontSize = `${puzzleWidth / 2}px`;
+                    mask.style.backgroundColor = "rgb(255,105,180)";
+                    mask.style.border = "1px solid #fff";
                     mask.style.opacity = "0";
 
                     puzzle.append(mask);
